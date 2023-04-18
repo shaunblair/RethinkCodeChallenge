@@ -1,5 +1,4 @@
 using System.ComponentModel.DataAnnotations;
-using PatientRecordApi.Shared;
 
 namespace PatientRecordApi.Models;
 

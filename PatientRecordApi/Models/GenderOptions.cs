@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace PatientRecordApi.Shared;
+namespace PatientRecordApi.Models;
 
 public class GenderOption
 {

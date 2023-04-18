@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace PatientRecordApi.Data.Migrations
 {
     /// <inheritdoc />
@@ -45,6 +47,17 @@ namespace PatientRecordApi.Data.Migrations
                         principalTable: "GenderOption",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "GenderOption",
+                columns: new[] { "Id", "FullGender", "ShortGender" },
+                values: new object[,]
+                {
+                    { 1, "Male", 'M' },
+                    { 2, "Female", 'F' },
+                    { 3, "Non-binary", 'N' },
+                    { 4, "Other", 'O' }
                 });
 
             migrationBuilder.CreateIndex(
