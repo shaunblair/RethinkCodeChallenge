@@ -1,4 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using PatientRecordApi.Data;
+using PatientRecordApi.Models;
 
 namespace PatientRecordApi.Controllers;
 
@@ -6,9 +9,16 @@ namespace PatientRecordApi.Controllers;
 [Route("api/[controller]")]
 public class PatientController : ControllerBase
 {
-    [HttpGet] 
-    public async Task<string> GetAllPatients()
+    private PatientContext _context;
+
+    public PatientController(PatientContext context)
     {
-        return "This is all the patients";
+        _context = context;
+    }
+
+    [HttpGet] 
+    public async Task<List<Patient>> GetAllPatients()
+    {
+        return await _context.Patients.Include(p => p.Gender).ToListAsync();
     }
 }
