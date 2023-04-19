@@ -63,4 +63,23 @@ public class PatientController : ControllerBase
 
       return Ok();
     }
+
+    [HttpPut]
+    public async Task<IActionResult> UpdatePatientById(int Id, string fName, string lName, string dob, string gender)
+    {
+        var patient = _context.Patients.Where(p => p.Id == Id).FirstOrDefault();
+
+        if (patient == null)
+        {
+            return BadRequest();
+        }
+
+        patient.FirstName = fName;
+        patient.LastName = lName;
+        patient.Birthday = DateTime.Parse(dob);
+        patient.Gender = _context.GenderOptions.Where(g => g.ShortGender.ToString() == gender.Substring(0,1)).First();
+
+        return Ok();
+    }
+
 }
