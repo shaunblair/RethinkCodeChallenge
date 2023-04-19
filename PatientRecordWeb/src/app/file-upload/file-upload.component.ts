@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { EventListenerServiceService } from '../services/event-listener-service.service';
 
 @Component({
   selector: 'app-file-upload',
@@ -10,7 +11,7 @@ export class FileUploadComponent implements OnInit {
   
   selectedFile: File = null;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private eventListenerService:EventListenerServiceService) {}
 
   ngOnInit(): void {
   }
@@ -25,5 +26,6 @@ export class FileUploadComponent implements OnInit {
     .subscribe(res => {
       console.log(res);
     });
+    this.eventListenerService.sendClickEvent();
   }
 }
