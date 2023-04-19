@@ -20,4 +20,5 @@ public class PatientContext : DbContext
     }
 
     public DbSet<Patient> Patients { get; set; }
+    public DbSet<GenderOption> GenderOptions { get; set; }
 }

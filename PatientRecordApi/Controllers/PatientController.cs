@@ -21,4 +21,46 @@ public class PatientController : ControllerBase
     {
         return await _context.Patients.Include(p => p.Gender).ToListAsync();
     }
+
+    [HttpPost]
+    public async Task<IActionResult> UploadPatients(IFormFile csvFile)
+    {
+      using (var reader = new StreamReader(csvFile.OpenReadStream()))
+      {
+        var csvData = reader.ReadToEnd();
+        var rows = csvData.Split('\n');
+        var headerCount = 0;
+
+        foreach (var row in rows)
+        {
+            if (!string.IsNullOrEmpty(row))
+            {
+                if (headerCount > 0)
+                {
+                    var values = row.Split(',');
+
+                    var patient = new Patient
+                    {
+                        FirstName = values[0].ToString(),
+                        LastName = values[1].ToString(),
+                        Birthday = DateTime.Parse(values[2].ToString()),
+                        Gender = _context.GenderOptions.Where(g => g.ShortGender.ToString() == values[3].Substring(0,1)).First()
+                    };
+
+                    var record = _context.Patients.Where(p => p.FirstName == values[0].ToString() && p.LastName == values[1].ToString()).FirstOrDefault();
+                    if (record == null)
+                    {
+                        _context.Patients.Add(patient);
+                    }
+                    
+                }
+                headerCount++;
+            }
+        }
+
+        await _context.SaveChangesAsync();
+      }
+
+      return Ok();
+    }
 }
