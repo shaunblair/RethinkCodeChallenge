@@ -65,19 +65,11 @@ public class PatientController : ControllerBase
     }
 
     [HttpPut]
-    public async Task<IActionResult> UpdatePatientById(int Id, string fName, string lName, string dob, string gender)
+    public async Task<IActionResult> UpdatePatientById(Patient pat)
     {
-        var patient = _context.Patients.Where(p => p.Id == Id).FirstOrDefault();
+        _context.Patients.Update(pat);
 
-        if (patient == null)
-        {
-            return BadRequest();
-        }
-
-        patient.FirstName = fName;
-        patient.LastName = lName;
-        patient.Birthday = DateTime.Parse(dob);
-        patient.Gender = _context.GenderOptions.Where(g => g.ShortGender.ToString() == gender.Substring(0,1)).First();
+        await _context.SaveChangesAsync();
 
         return Ok();
     }
