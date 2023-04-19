@@ -58,6 +58,7 @@ public class PatientController : ControllerBase
                     catch(Exception ex)
                     {
                         // catch records here and log out which failed
+                        // add table for error records
                     }
                 }
                 headerCount++;
