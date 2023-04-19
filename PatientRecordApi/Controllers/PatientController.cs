@@ -37,22 +37,28 @@ public class PatientController : ControllerBase
             {
                 if (headerCount > 0)
                 {
-                    var values = row.Split(',');
-
-                    var patient = new Patient
+                    try
                     {
-                        FirstName = values[0].ToString(),
-                        LastName = values[1].ToString(),
-                        Birthday = DateTime.Parse(values[2].ToString()),
-                        Gender = _context.GenderOptions.Where(g => g.ShortGender.ToString() == values[3].Substring(0,1)).First()
-                    };
+                        var values = row.Split(',');
 
-                    var record = _context.Patients.Where(p => p.FirstName == values[0].ToString() && p.LastName == values[1].ToString()).FirstOrDefault();
-                    if (record == null)
-                    {
-                        _context.Patients.Add(patient);
+                        var patient = new Patient
+                        {
+                            FirstName = values[0].ToString(),
+                            LastName = values[1].ToString(),
+                            Birthday = DateTime.Parse(values[2].ToString()),
+                            Gender = _context.GenderOptions.Where(g => g.ShortGender.ToString() == values[3].Substring(0,1)).First()
+                        };
+
+                        var record = _context.Patients.Where(p => p.FirstName == values[0].ToString() && p.LastName == values[1].ToString()).FirstOrDefault();
+                        if (record == null)
+                        {
+                            _context.Patients.Add(patient);
+                        }
                     }
-                    
+                    catch(Exception ex)
+                    {
+                        // catch records here and log out which failed
+                    }
                 }
                 headerCount++;
             }
