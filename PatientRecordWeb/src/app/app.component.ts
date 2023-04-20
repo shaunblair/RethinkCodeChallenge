@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Patient } from './models/patient';
 import { Subject, Subscription } from 'rxjs';
-import { EventListenerServiceService } from './services/event-listener-service.service';
 
 @Component({
   selector: 'app-root',
@@ -16,15 +15,12 @@ export class AppComponent implements OnInit {
   dtops: DataTables.Settings = {};
   dtTrig: Subject<any> = new Subject<any>();
 
-  constructor(private http: HttpClient, private eventListenerService:EventListenerServiceService) {
-    this.clickEventSubscription = this.eventListenerService.getClickEvent().subscribe(() => {
-      this.getTableData();
-    });
+  constructor(private http: HttpClient) {
   }
 
   ngOnInit(): void {
     this.dtops = {
-      pagingType: 'full_numbers'
+      pagingType: 'simple'
     }
     this.getTableData();
   }
