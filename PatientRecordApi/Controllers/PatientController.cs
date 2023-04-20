@@ -22,6 +22,13 @@ public class PatientController : ControllerBase
         return await _context.Patients.Include(p => p.Gender).ToListAsync();
     }
 
+    [HttpGet]
+    [Route("{id}")] 
+    public async Task<Patient> GetPatient(int id)
+    {
+        return await _context.Patients.Include(p => p.Gender).FirstOrDefaultAsync(p => p.Id == id);
+    }
+
     [HttpPost]
     public async Task<IActionResult> UploadPatients(IFormFile csvFile)
     {

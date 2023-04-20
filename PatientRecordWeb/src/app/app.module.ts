@@ -10,6 +10,7 @@ import { FileUploadComponent } from './file-upload/file-upload.component';
 import { DataTablesModule } from 'angular-datatables';
 import { PatientEditComponent } from './patient-edit/patient-edit.component';
 import { TableDataComponent } from './table-data/table-data.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { TableDataComponent } from './table-data/table-data.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    DataTablesModule
+    DataTablesModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

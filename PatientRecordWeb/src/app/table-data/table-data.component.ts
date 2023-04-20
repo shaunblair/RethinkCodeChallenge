@@ -33,9 +33,4 @@ export class TableDataComponent implements OnInit{
     )
   }
 
-  EditPatient(patientId: string)
-  {
-    console.log(patientId);
-  }
-
 }
