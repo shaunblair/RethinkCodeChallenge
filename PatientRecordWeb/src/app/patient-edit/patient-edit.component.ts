@@ -34,5 +34,17 @@ export class PatientEditComponent implements OnInit{
           gender: p.gender.shortGender
         }); 
       }
-    )}
+    )
+  }
+
+  UpdatePatient() {
+    const p: Patient = {
+      id: this.patientForm.value.id,
+      firstName: this.patientForm.value.firstName,
+      lastName: this.patientForm.value.lastName,
+      birthday: this.patientForm.value.birthday,
+      gender: this.patientForm.value.gender
+    }
+    this.data.updatePatient(p);
+  }
 }

@@ -79,7 +79,7 @@ public class PatientController : ControllerBase
     }
 
     [HttpPut]
-    public async Task<IActionResult> UpdatePatientById(Patient pat)
+    public async Task<IActionResult> UpdatePatient(Patient pat)
     {
         _context.Patients.Update(pat);
 

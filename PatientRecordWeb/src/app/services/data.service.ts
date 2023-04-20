@@ -18,4 +18,10 @@ export class DataService {
   getPatientById(id: number): Observable<Patient> {
     return this.http.get<Patient>('http://localhost:5150/api/patient/' + id);
   }
+
+  updatePatient(p: Patient) {
+    this.http.put<Patient>('http://localhost:5150/api/patient', p).subscribe(res => {
+      console.log(res);
+    });;
+  }
 }
