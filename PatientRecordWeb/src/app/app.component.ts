@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Patient } from './models/patient';
-import { Subscription } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import { EventListenerServiceService } from './services/event-listener-service.service';
 
 @Component({
@@ -13,6 +13,8 @@ export class AppComponent implements OnInit {
   title = 'Patient Records';
   patients: Patient[];
   clickEventSubscription:Subscription;
+  dtops: DataTables.Settings = {};
+  dtTrig: Subject<any> = new Subject<any>();
 
   constructor(private http: HttpClient, private eventListenerService:EventListenerServiceService) {
     this.clickEventSubscription = this.eventListenerService.getClickEvent().subscribe(() => {
@@ -21,6 +23,9 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.dtops = {
+      pagingType: 'full_numbers'
+    }
     this.getTableData();
   }
 
@@ -32,5 +37,6 @@ export class AppComponent implements OnInit {
         console.log('request complete');
       }
     });
+    this.dtTrig.next(null);
   }
 }
