@@ -8,12 +8,16 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { FileUploadComponent } from './file-upload/file-upload.component';
 import { DataTablesModule } from 'angular-datatables';
+import { PatientEditComponent } from './patient-edit/patient-edit.component';
+import { TableDataComponent } from './table-data/table-data.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavBarComponent,
-    FileUploadComponent
+    FileUploadComponent,
+    PatientEditComponent,
+    TableDataComponent
   ],
   imports: [
     BrowserModule,
