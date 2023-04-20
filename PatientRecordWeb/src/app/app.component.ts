@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Subject } from 'rxjs';
+import { DataService } from './services/data.service';
 import { Patient } from './models/patient';
-import { Subject, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -9,30 +9,33 @@ import { Subject, Subscription } from 'rxjs';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'Patient Records';
-  patients: Patient[];
-  clickEventSubscription:Subscription;
   dtops: DataTables.Settings = {};
   dtTrig: Subject<any> = new Subject<any>();
+  patients: Patient[];
 
-  constructor(private http: HttpClient) {
+  constructor(private data: DataService) {
   }
 
   ngOnInit(): void {
     this.dtops = {
       pagingType: 'simple'
     }
-    this.getTableData();
+    this.LoadTable();
   }
 
-  getTableData() {
-    this.http.get<Patient[]>('http://localhost:5150/api/patient').subscribe({
-      next: data => this.patients = data, 
-      error: error => console.log(error),
-      complete: () => {
-        console.log('request complete');
+  LoadTable() {
+    this.data.getTableData().subscribe(
+      allData => {
+        this.patients = allData;
+        this.dtTrig.next(null);
+        return this.patients;
       }
-    });
-    this.dtTrig.next(null);
+    )
   }
+
+  EditPatient(patientId: string)
+  {
+    console.log(patientId);
+  }
+  
 }
