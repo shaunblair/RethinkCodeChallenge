@@ -22,6 +22,13 @@ public class PatientController : ControllerBase
         return await _context.Patients.Include(p => p.Gender).ToListAsync();
     }
 
+    [HttpGet] 
+    [Route("GenderOptions")] 
+    public async Task<List<GenderOption>> GetAllGenderOptions()
+    {
+        return await _context.GenderOptions.ToListAsync();
+    }
+
     [HttpGet]
     [Route("{id}")] 
     public async Task<Patient> GetPatient(int id)
@@ -79,12 +86,21 @@ public class PatientController : ControllerBase
     }
 
     [HttpPut]
-    public async Task<IActionResult> UpdatePatient(Patient pat)
+    public async Task<IActionResult> UpdatePatient(Patient patient)
     {
-        _context.Patients.Update(pat);
+        var dbPatient = await _context.Patients.FindAsync(patient.Id);
+        if(dbPatient == null)
+        {
+            return BadRequest("Patient not found.");
+        }
+
+        dbPatient.FirstName = patient.FirstName;
+        dbPatient.LastName = patient.LastName;
+        dbPatient.Birthday = patient.Birthday;
+        dbPatient.Gender = patient.Gender;
 
         await _context.SaveChangesAsync();
-
+        
         return Ok();
     }
 

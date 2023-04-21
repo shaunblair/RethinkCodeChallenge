@@ -15,7 +15,7 @@
             <tr *ngFor="let patient of patients">
                 <td>{{patient.firstName}}</td>
                 <td>{{patient.lastName}}</td>
-                <td>{{patient.birthday}}</td>
+                <td>{{patient.birthday | date}}</td>
                 <td>{{patient.gender.shortGender}}</td>
                 <td>
                     <a class="btn btn-primary" routerLink="/edit/{{patient.id}}">Edit</a>
