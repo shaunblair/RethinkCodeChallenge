@@ -1,7 +1,7 @@
 <app-file-upload (patientsUploaded)="updatePatientList()"></app-file-upload>
 
 <div class="table-responsive-md" style="margin-top: 50px;">
-    <table datatable [dtOptions]="dtops" [dtTrigger]="dtTrig" class="table table-bordered">
+    <table id="dtPatients" datatable [dtOptions]="dtops" [dtTrigger]="dtTrig" class="table table-bordered">
         <thead class="bg-primary text-white">
             <tr>
                 <th>First Name</th>

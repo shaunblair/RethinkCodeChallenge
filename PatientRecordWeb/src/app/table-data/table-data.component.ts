@@ -18,7 +18,8 @@ export class TableDataComponent implements OnInit{
 
   ngOnInit(): void {
     this.dtops = {
-      pagingType: 'simple'
+      pagingType: 'simple',
+      retrieve: true
     }
     this.LoadTableData();
   }
