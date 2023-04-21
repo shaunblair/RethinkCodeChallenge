@@ -27,4 +27,8 @@ export class DataService {
   updatePatient(p: Patient): Observable<Patient> {
     return this.http.put<Patient>('http://localhost:5150/api/patient', p);
   }
+
+  uploadFile(fData: FormData): Observable<any> {
+    return this.http.post('http://localhost:5150/api/patient', fData);
+  }
 }

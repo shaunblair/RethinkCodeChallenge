@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-file-upload',
@@ -10,7 +11,7 @@ export class FileUploadComponent implements OnInit {
   
   selectedFile: File = null;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private data: DataService) {}
 
   ngOnInit(): void {
   }
@@ -21,8 +22,7 @@ export class FileUploadComponent implements OnInit {
   onUpload() {
     const filedata = new FormData();
     filedata.append('csvFile', this.selectedFile, this.selectedFile.name);
-    this.http.post('http://localhost:5150/api/patient', filedata)
-    .subscribe(res => {
+    this.data.uploadFile(filedata).subscribe(res => {
       console.log(res);
     });
   }
