@@ -8,7 +8,7 @@ Application runs, with the ability to import csv file, view records, and update 
 - Angular 15
 - .Net 7
 - Sqlite (for ease of use, able to save the file in the project)
-- Angular Datatables
+- Angular Datatables (ngx-datatable)
 - Toastr for messages
 
 ## Future Improvements
