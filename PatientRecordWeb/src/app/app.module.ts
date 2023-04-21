@@ -11,6 +11,8 @@ import { DataTablesModule } from 'angular-datatables';
 import { PatientEditComponent } from './patient-edit/patient-edit.component';
 import { TableDataComponent } from './table-data/table-data.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ToastrModule } from 'ngx-toastr';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     BrowserAnimationsModule,
     HttpClientModule,
     DataTablesModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CommonModule,
+    ToastrModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -5,6 +5,8 @@ import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { formatDate } from '@angular/common';
 import { Gender } from '../models/gender';
+import { ToastrService } from 'ngx-toastr';
+
 
 @Component({
   selector: 'app-patient-edit',
@@ -24,7 +26,7 @@ export class PatientEditComponent implements OnInit{
     gender: new FormControl('')
   });
 
-  constructor(private data: DataService, private route: ActivatedRoute, private fb: FormBuilder){}
+  constructor(private data: DataService, private route: ActivatedRoute, private fb: FormBuilder, private toastr: ToastrService){}
   
   ngOnInit(): void {
     this.LoadPatient();
@@ -55,6 +57,7 @@ export class PatientEditComponent implements OnInit{
       }
   
       this.data.updatePatient(p).subscribe((patient: Patient) => this.patientUpdated.emit(patient));
+      this.toastr.success('Patient Updated!');
     });
   }
 }
