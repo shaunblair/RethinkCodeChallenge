@@ -13,6 +13,7 @@ Application runs, with the ability to import csv file, view records, and update 
 
 ## Future Improvements
 - API should be separated out in service repository. Kept most functionality in the controller for ease of development, but that is not a best practice.
+- Handle large DOM load. Paging and sorting should be done on the server.
 - Fix bug with data table row count.
 - Add tests.
 - Get better visuals. NOT a strength of mine.
