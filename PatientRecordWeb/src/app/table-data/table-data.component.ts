@@ -20,7 +20,14 @@ export class TableDataComponent implements OnInit{
     this.dtops = {
       pagingType: 'simple'
     }
-    
+    this.LoadTableData();
+  }
+
+  updatePatientList() {
+    this.LoadTableData();
+  }
+
+  LoadTableData() {
     this.data.getTableData().subscribe(
       (result: Patient[]) => {
         (this.patients = result);

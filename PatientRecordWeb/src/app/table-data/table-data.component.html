@@ -1,4 +1,4 @@
-<app-file-upload></app-file-upload>
+<app-file-upload (patientsUploaded)="updatePatientList()"></app-file-upload>
 
 <div class="table-responsive-md" style="margin-top: 50px;">
     <table datatable [dtOptions]="dtops" [dtTrigger]="dtTrig" class="table table-bordered">

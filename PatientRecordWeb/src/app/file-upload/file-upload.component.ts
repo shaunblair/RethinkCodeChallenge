@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { DataService } from '../services/data.service';
+import { Patient } from '../models/patient';
 
 @Component({
   selector: 'app-file-upload',
@@ -8,7 +9,7 @@ import { DataService } from '../services/data.service';
   styleUrls: ['./file-upload.component.scss']
 })
 export class FileUploadComponent implements OnInit {
-  
+  @Output() patientsUploaded = new EventEmitter<Patient[]>();
   selectedFile: File = null;
 
   constructor(private http: HttpClient, private data: DataService) {}
@@ -23,7 +24,7 @@ export class FileUploadComponent implements OnInit {
     const filedata = new FormData();
     filedata.append('csvFile', this.selectedFile, this.selectedFile.name);
     this.data.uploadFile(filedata).subscribe(res => {
-      console.log(res);
+      this.patientsUploaded.emit(res);
     });
   }
 }
