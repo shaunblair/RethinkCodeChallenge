@@ -23,5 +23,6 @@ Application runs, with the ability to import csv file, view records, and update 
 - In terminal, CD into web directory, run npm install to download required packages.
 - CD into the API directory, and run dotnet restore from package manager console.
 - Run dotnet ef database update to apply necessary migrations and create Sqlite database.
+- [Note] You may need to run dotnet build or restart VS to get the SQLite database to attach.
 - Run dotnet run to start the API server.
 - CD back into web and run ng serve to start the application.
